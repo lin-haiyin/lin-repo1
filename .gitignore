@@ -1,4 +1,8 @@
 .vscode/
 .user.c.swap 
 a.out
-course.dat
+courses.dat
+teachers.dat
+members.dat
+rooms.dat
+dance_system

@@ -1,4 +1,4 @@
-/*admin.c 文件用于管理员功能处理*/
+/*admin.c 会员管理界面初始化，完成会员相关功能*/
 #include "dance_studio.h"
 
 // 声明管理员菜单函数

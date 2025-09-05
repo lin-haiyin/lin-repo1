@@ -44,6 +44,13 @@ typedef enum {
     ROOM_INAVAILABLE  // 不可用
 } RoomStatus;
 
+//课程状态
+typedef enum{
+    COURSE_ONGOING,
+    COURSE_FINISHING,
+    COURSE_CANCELLED
+}CourseStatus;
+
 // 课程类型
 typedef enum {
     JAZZ,        // 爵士
@@ -99,7 +106,7 @@ typedef struct Admin {
 typedef struct Course {
     char course_id[STR_LEN];     // 课程ID
     char course_name[STR_LEN];   // 课程名称
-    char teacher[STR_LEN];       // 授课教师（关联教师ID）
+    char teacher_id[STR_LEN];       // 授课教师（关联教师ID）
     char time[STR_LEN];          // 单节课程时长
     char course_room[STR_LEN];   // 上课教室（关联教室ID）
     int course_price;            // 课程价格
@@ -108,6 +115,7 @@ typedef struct Course {
     char course_members[MAX_COURSE_MAX_PEOPLE][STR_LEN]; // 报名会员ID列表
     int course_max_people;       // 最大授课人数
     CourseType course_type;      // 课程类型
+    CourseStatus status;         // 课程状态
     char start_time[STR_LEN];    // 开课时间
     char end_time[STR_LEN];      // 结课时间
 } Course;
@@ -125,6 +133,7 @@ typedef struct Teacher {
     char teacher_id[STR_LEN];    // 教师ID
     char teacher_name[STR_LEN];  // 教师姓名
     char teacher_course[5][STR_LEN]; // 授课课程（最多5门）
+    int course_count;  
 } Teacher;
 
 /* 链表节点定义：用于数据存储 */
@@ -292,6 +301,10 @@ void print_member(MemberNode* member);
 void is_print(MemberNode* member);
 // 统一查找入口（1=卡号，2=会员ID，3=姓名，4=手机号）
 MemberNode* find_member_by_type(int find_type, char* input);
+// 课程查找函数声明（供member_course.c等调用）
+CourseNode* find_course_by_id(const char* course_id);
+// 教室查找函数声明（供admin_room.c调用）
+RoomNode* find_room_by_id(const char* room_id);
 
 /* 函数声明：图形界面专用（GTK） */
 // 主窗口创建
